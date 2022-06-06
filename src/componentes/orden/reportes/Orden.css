@@ -1,0 +1,18 @@
+  table {
+        border-collapse: collapse;
+        border-radius: 5px;
+        border-style: hidden; /* hide standard table (collapsed) border */
+        box-shadow: 0 0 0 2px rgb(32, 124, 211); /* this draws the table border  */ 
+        height: 100%;
+    }
+
+    td {
+        border: 1px solid rgb(65, 131, 253);
+        font-size: 10px;
+    }
+
+    ul, li{
+        text-transform: uppercase
+    }
+
+ 
