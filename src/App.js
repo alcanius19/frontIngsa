@@ -9,20 +9,20 @@ import Reportes from "./componentes/orden/reportes/Reportes";
 import FormatoOrden from "./componentes/orden/reportes/FormatoOrden";
 import Firma from "./componentes/orden/reportes/Firma";
 import Login from "./componentes/login/Login";
-
+import InputDinamico from "./componentes/orden/InputDinamico";
 function App() {
   return (
     <Router>
       <Routes>
-        {/* <Route
+        <Route
           exact
-          path="/"
+          path="/input"
           element={
             <>
-              <Login />
+              <InputDinamico />
             </>
           }
-        /> */}
+        />
         <Route
           exact
           path="/"

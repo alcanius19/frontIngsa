@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Responsable from "./Responsable";
-import Recursos from "./Recursos";
+import {Recursos} from "./Recursos";
 import PropTypes from "prop-types";
 import Select from "react-select";
 import Switch from "react-switch";
@@ -11,10 +11,12 @@ import { CREAR_ORDEN } from "./graphql/mutations";
 import { Empleados } from "../../data/empleados";
 import Swal from "sweetalert2";
 import { DataContext } from "../context/DataContext";
-
+import InputDinamico from "./InputDinamico";
 function OrdenTrabajo() {
   const { data } = useContext(DataContext);
- 
+
+  const [datosRecurso,setDatosRecurso] = useState();
+  
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectTrabajo, setSelectTrabajo] = useState(null);
   const [crearOrden] = useMutation(CREAR_ORDEN);
@@ -35,9 +37,7 @@ function OrdenTrabajo() {
     detalle_trabajos: "",
     tipo_vehiculo: "",
     placa_vehiculo: "",
-    codigo1: "",
-    nombre1: "",
-    cedula1: "",
+    recursos: "",
     requerimientos: "",
     trabajo_altura: false,
     trabajo_caliente: false,
@@ -81,32 +81,31 @@ function OrdenTrabajo() {
   datos.trabajo = datosTrabajo().toString();
 
   const handleInpuChange = (event) => {
+    const usuariosRecurso = localStorage.getItem("userRecurso");
+    datos.recursos = usuariosRecurso;
     let value = event.target.value;
-    let codigo = document.getElementsByTagName("input")[7];
-    let nombre = document.getElementsByTagName("input")[8];
-    let cargo = document.getElementsByTagName("input")[9];
-    let resp_trabajos = document.getElementsByTagName("input")[21];
-    let resp_trab_ced = document.getElementsByTagName("input")[22];
-    console.log(resp_trabajos);
+    let codigo = document.getElementsByName("codigo")[0];
+    let nombre = document.getElementsByName("nombre")[0];
+    let cargo = document.getElementsByName("cargo")[0];
+    let resp_trabajos = document.getElementsByName("nombre_resp_trab")[0];
+    let resp_trab_ced = document.getElementsByName("cedula2")[0];
     const { empleados } = Empleados;
     for (let index = 0; index < empleados.length; index++) {
       const element = empleados[index].cedula;
-
       if (value === element) {
         datos.codigo = empleados[index].codigo;
         datos.nombre = empleados[index].nombres;
         datos.cargo = empleados[index].cargo;
+        datos.nombre_resp_trab = empleados[index].nombres;
+        datos.cedula2 = empleados[index].cedula;
         codigo.value = empleados[index].codigo;
         nombre.value = empleados[index].nombres;
         cargo.value = empleados[index].cargo;
-        datos.nombre_resp_trab = empleados[index].nombres;
-        datos.cedula2 = empleados[index].cedula;
         resp_trabajos.value = empleados[index].nombres;
         resp_trab_ced.value = empleados[index].cedula;
       } else {
       }
     }
-    console.log(event);
     setDatos({
       ...datos,
       [event.target.name]: event.target.value,
@@ -117,11 +116,8 @@ function OrdenTrabajo() {
   };
 
   // CREAR ORDEN
-
   const enviarDatos = (event) => {
     event.preventDefault();
-
-    console.log(datos);
     crearOrden({
       variables: {
         orden_trabajo: parseInt(datos.orden_trabajo),
@@ -139,6 +135,7 @@ function OrdenTrabajo() {
         detalle_trabajos: datos.detalle_trabajos,
         tipo_vehiculo: datos.tipo_vehiculo,
         placa_vehiculo: datos.placa_vehiculo,
+        recursos: datos.recursos,
         requerimientos: datos.requerimientos,
         trabajo: datos.trabajo,
         cierre: datos.cierre,
@@ -158,7 +155,9 @@ function OrdenTrabajo() {
       Swal.fire("Success!", "Datos Guardados!", "success");
     });
   };
-
+ 
+  
+  
   return (
     <div>
       <form onSubmit={enviarDatos}>
@@ -261,7 +260,7 @@ function OrdenTrabajo() {
           </div>
 
           <hr />
-          <Recursos recurso={handleInpuChange} />
+          <Recursos  />
           <hr />
           <h6 className="text-center">Trabajo de alto riesgo</h6>
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function Municipios({ handleInput }) {
   const [municipios, setMunicipios] = useState();
@@ -6,9 +6,10 @@ function Municipios({ handleInput }) {
   const endPoint =
     "https://www.datos.gov.co/resource/xdk5-pm3f.json?departamento=Huila";
 
+  const getMunicipios = async ()=>{
   let datos = [];
-  fetch(endPoint)
-    .then((response) => response.json())
+  await fetch(endPoint)
+    .then((response) =>  response.json())
     .then((showData) => {
       for (let index = 0; index < showData?.length; index++) {
         datos.push(showData[index]);
@@ -16,6 +17,10 @@ function Municipios({ handleInput }) {
       }
       setMunicipios(datos);
     });
+  }
+  useEffect(()=>{
+   getMunicipios()
+  },[])
   return (
     <div>
       <select

@@ -16,6 +16,7 @@ export const CREAR_ORDEN = gql`
     $detalle_trabajos: String
     $tipo_vehiculo: String
     $placa_vehiculo: String
+    $recursos: String
     $requerimientos: String
     $trabajo: String
     $cierre: String
@@ -41,6 +42,7 @@ export const CREAR_ORDEN = gql`
         detalle_trabajos: $detalle_trabajos
         tipo_vehiculo: $tipo_vehiculo
         placa_vehiculo: $placa_vehiculo
+        recursos: $recursos
         requerimientos: $requerimientos
         trabajo: $trabajo
         cierre: $cierre
@@ -54,6 +56,7 @@ export const CREAR_ORDEN = gql`
       orden_trabajo
       contrato
       estado
+      recursos
     }
   }
   
