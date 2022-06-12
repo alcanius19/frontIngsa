@@ -29,8 +29,9 @@ function Municipios({ handleInput }) {
         name="municipio"
         onChange={handleInput}
       >
-        {municipios?.map((option) => (
-          <option value={option?.municipio}>{option?.municipio}</option>
+        <option value="none" selected disabled hidden>Seleccione una Opcion</option>
+        {municipios?.map((option,i) => (
+          <option value={option?.municipio} key={i}>{option?.municipio}</option>
         ))}
       </select>
     </div>

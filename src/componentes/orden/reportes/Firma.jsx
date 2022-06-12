@@ -16,7 +16,7 @@ export default function Firma() {
     <div>
       <CanvasDraw
         brushRadius={1}
-        canvasWidth={400}
+        canvasWidth={300}
         canvasHeight={150}
         hideGrid={true}
         catenaryColor="white"

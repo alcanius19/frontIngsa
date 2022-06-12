@@ -1,23 +1,35 @@
 import React, { useEffect, useState } from "react";
+
 import Firma from "./Firma";
-// import jsPDF from "jspdf";
-// import html2canvas from "html2canvas";
+
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { ORDEN_ID } from "../graphql/queries";
 import { useParams } from "react-router-dom";
-import "./Orden.css";
+import styles from './style/Orden.module.css';
+import imagen from "../../img/logo.jpeg"
+
 
 export default function FormatoOrden(props) {
+  
   const { id } = useParams();
+  
+  const [valores, setValores] = useState();
   console.log("parametros: ", id);
   const { data } = useQuery(ORDEN_ID, {
     variables: {
       id,
     },
+    fetchPolicy: "no-cache",
   });
   let datos = data?.orden_ID;
 
+  const handlePrint = ()=>{
+    window.print();
+  }
+  
+    
+  
   // const _exportPdf = () => {
   //   html2canvas(document.querySelector("#capture")).then((canvas) => {
   //     // document.body.appendChild(canvas);
@@ -29,7 +41,16 @@ export default function FormatoOrden(props) {
   // };
   // _exportPdf();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (datos?.recursos) {
+      let json = JSON.parse(datos?.recursos);
+      // var result = json.map(usuario => ([usuario.nombre,usuario.cedula,usuario.codigo ]));
+      // console.log(result)
+      setValores(json);
+    } else {
+      console.log("error");
+    }
+  }, [datos?.recursos]);
 
   return (
     <div>
@@ -41,14 +62,17 @@ export default function FormatoOrden(props) {
           ATRAS
         </Link>
       </button>
-
       <div id="capture">
-        <div className="container-fluid mt-2 ">
-          <table className="" style={{ margin: "0 auto" }}>
+        
+        <div className="container-fluid mt-1  ">
+        <img src={imagen}></img>
+          <table className={styles.table} style={{ margin: "0 auto" }}>
             <tbody>
               <tr>
+               
                 <td colSpan="8" style={{ textAlign: "center" }}>
                   <h6>FORMATO ORDEN DE TRABAJO</h6>
+                  
                 </td>
               </tr>
               {/* <tr>
@@ -56,43 +80,42 @@ export default function FormatoOrden(props) {
                 <td colSpan="6">29 agosto 2022</td>
               </tr> */}
               <tr>
-                <td>ORDEN DE TRABAJO : {datos?.ordensId} </td>
-                <td>
+                <td colSpan="2">ORDEN DE TRABAJO : {datos?.ordensId} </td>
+                <td colSpan="2">
                   ESTADO: {datos?.estado === true ? "activo" : "inactivo"}
                 </td>
-                <td colSpan="4">MUNICIPIO : {datos?.municipio}</td>
-                <td>SECTOR :{datos?.Sector}</td>
+                <td colSpan="2" >MUNICIPIO : {datos?.municipio}</td>
+                <td colSpan="2">SECTOR :{datos?.Sector}</td>
               </tr>
               <tr>
-                <td colSpan="3">
+                <td colSpan="4">
                   FECHA Y HORA DE ELABORACION: {datos?.fecha_elaboracion}{" "}
                 </td>
-                <td colSpan="3">
+                <td colSpan="2">
                   FECHA Y HORA DE INICIO: {datos?.fecha_inicio}{" "}
                 </td>
-                <td colSpan="">
+                <td colSpan="2">
                   FECHA Y HORA DE TERMINACION:{datos?.fecha_terminacion}{" "}
                 </td>
               </tr>
               <tr>
-                <td colSpan="7" style={{ textAlign: "center" }}>
+                <td colSpan="8" style={{ textAlign: "center" }}>
                   RESPONSABLE DE LOS TRABAJOS
                 </td>
               </tr>
               <tr>
-                <td>Cedula: {datos?.cedula}</td>
-                <td colSpan="4">Nombre: {datos?.nombre}</td>
-                <td>Codigo: {datos?.codigo}</td>
-
-                <td>Cargo: {datos?.cargo}</td>
+                <td colSpan="2">Cedula: {datos?.cedula}</td>
+                <td colSpan="2">Nombre: {datos?.nombre}</td>
+                <td colSpan="2">Codigo: {datos?.codigo}</td>
+                <td colSpan="2">Cargo: {datos?.cargo}</td>
               </tr>
               <tr>
-                <td colSpan="7" style={{ textAlign: "center" }}>
+                <td colSpan="8" style={{ textAlign: "center" }}>
                   DESCRIPCION
                 </td>
               </tr>
               <tr>
-                <td colSpan="7" style={{ textAlign: "left" }}>
+                <td colSpan="8" style={{ textAlign: "left" }}>
                   Detalle de los trabajos a realizar:{" "}
                   <textarea
                     className="form-control"
@@ -102,41 +125,30 @@ export default function FormatoOrden(props) {
                 </td>
               </tr>
               <tr>
-                <td colSpan="7" style={{ textAlign: "center" }}>
+                <td colSpan="8" style={{ textAlign: "center" }}>
                   RECURSOS
                 </td>
               </tr>
               <tr>
-                <td colSpan="5">Tipo de Vehiculo : {datos?.tipo_vehiculo}</td>
-                <td colSpan="2">Placa de Vehiculo : {datos?.placa_vehiculo}</td>
+                <td colSpan="4">Tipo de Vehiculo : {datos?.tipo_vehiculo}</td>
+                <td colSpan="4">Placa de Vehiculo : {datos?.placa_vehiculo}</td>
               </tr>
+
+              {valores?.map((p, i) => (
+                <tr>
+                  <td colSpan="2">Codigo: {p.codigo}</td>
+                  <td colSpan="4">Nombre: {p.nombre}</td>
+                  <td colSpan="2">Cedula: {p.cedula}</td>
+                </tr>
+              ))}
+
               <tr>
-                <td colSpan="">Codigo: {datos?.codigo1}</td>
-                <td colSpan="5">Nombre: {datos?.nombre1}</td>
-                <td colSpan="1">Cedula: {datos?.cedula1}</td>
-              </tr>
-              <tr>
-                <td colSpan="">Codigo: {datos?.codigo1}</td>
-                <td colSpan="5">Nombre: {datos?.nombre1}</td>
-                <td colSpan="1">Cedula: {datos?.cedula1}</td>
-              </tr>
-              <tr>
-                <td colSpan="">Codigo: {datos?.codigo1}</td>
-                <td colSpan="5">Nombre: {datos?.nombre1}</td>
-                <td colSpan="1">Cedula: {datos?.cedula1}</td>
-              </tr>
-              <tr>
-                <td colSpan="">Codigo: {datos?.codigo1}</td>
-                <td colSpan="5">Nombre: {datos?.nombre1}</td>
-                <td colSpan="1">Cedula: {datos?.cedula1}</td>
-              </tr>
-              <tr>
-                <td colSpan="7" style={{ textAlign: "center" }}>
+                <td colSpan="8" style={{ textAlign: "center" }}>
                   TRABAJO DE ALTO RIESGO
                 </td>
               </tr>
               <tr>
-                <td colSpan="7">
+                <td colSpan="8">
                   <ul>
                     <li>{datos?.trabajo}</li>
                   </ul>
@@ -145,14 +157,14 @@ export default function FormatoOrden(props) {
 
               <tr>
                 <td
-                  colSpan="7"
+                  colSpan="8"
                   style={{ textAlign: "center", textTransform: "uppercase" }}
                 >
                   REQUERIMIENTOS PREOPERACIONALES
                 </td>
               </tr>
               <tr>
-                <td colSpan="7">
+                <td colSpan="8">
                   <p>
                     El responsable de los trabajos manifiesta que ha
                     inspeccionado y garantiza la utilización de los siguientes
@@ -165,12 +177,12 @@ export default function FormatoOrden(props) {
               </tr>
 
               <tr>
-                <td colSpan="7" style={{ textAlign: "center" }}>
+                <td colSpan="8" style={{ textAlign: "center" }}>
                   RECOMENDACIONES PREOPERACIONALES
                 </td>
               </tr>
               <tr>
-                <td colSpan="7">
+                <td colSpan="8">
                   <ol>
                     <li>
                       Inspeccionar el lugar a intervenir antes de ejecutar las
@@ -203,12 +215,12 @@ export default function FormatoOrden(props) {
               </tr>
 
               <tr>
-                <td colSpan="7" style={{ textAlign: "center" }}>
+                <td colSpan="8" style={{ textAlign: "center" }}>
                   Cierre
                 </td>
               </tr>
               <tr>
-                <td colSpan="7">
+                <td colSpan="8">
                   <textarea
                     className="form-control"
                     rows="3"
@@ -218,25 +230,27 @@ export default function FormatoOrden(props) {
               </tr>
 
               <tr>
-                <td colSpan="5">
+                <td colSpan="4">
                   FECHA Y HORA DE CIERRE: {datos?.fecha_cierre}{" "}
                 </td>
-                <td>VALES ALIMENTACION: {datos?.vales_alimentacion} </td>
-                <td>PERNOCTADA:{datos?.pernoctada} </td>
+                <td colSpan="2">VALES ALIMENTACION: {datos?.vales_alimentacion} </td>
+                <td colSpan="2">PERNOCTADA:{datos?.pernoctada} </td>
               </tr>
               <tr>
-                <td colSpan="3" style={{ textAlign: "center" }}>
+                <td colSpan="4" style={{ textAlign: "center" }}>
                   {" "}
                   Responsable de orden de trabajo
                 </td>
                 <td colSpan="4" style={{ textAlign: "center" }}>
                   {" "}
-                  Responsable de orden de trabajo
+                  Responsable del trabajo
                 </td>
               </tr>
               <tr>
-                <td colSpan="3">
-                  <Firma />
+                <td colSpan="4">
+                  {/* <Firma /> */}
+                  <div className={styles.firma}>
+                  </div>
                   <p>
                     NOMBRE:{" "}
                     {datos?.reponsable_orden[0]?.nombre
@@ -251,8 +265,11 @@ export default function FormatoOrden(props) {
                   </p>
                 </td>
                 <td colSpan="4">
+                <div className={styles.firma}>
+                  </div>
                   <p>
-                    <Firma style={{}} />
+                    {/* <Firma style={{}} /> */}
+                    
                     NOMBRE:{" "}
                     {datos?.responsable_trabajo[0]?.nombre
                       ? datos?.responsable_trabajo[0]?.nombre
@@ -264,6 +281,8 @@ export default function FormatoOrden(props) {
                       ? datos?.responsable_trabajo[0]?.cedula
                       : "null"}{" "}
                   </p>
+                  
+                  
                 </td>
               </tr>
               {/* <tr>
@@ -274,8 +293,12 @@ export default function FormatoOrden(props) {
               </tr> */}
             </tbody>
           </table>
+     
         </div>
       </div>
+    
     </div>
+    
   );
 }
+

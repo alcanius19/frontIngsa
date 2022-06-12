@@ -1,0 +1,49 @@
+ 
+  
+  table {
+        border-collapse: collapse;
+        border-radius: 5px;
+        border-style: hidden; /* hide standard table (collapsed) border */
+        box-shadow: 0 0 0 2px rgb(32, 124, 211); /* this draws the table border  */ 
+        height: 100%;
+        background-color: rgba(253, 253, 253, 0.422);
+
+     
+    }
+
+    img{
+      position: fixed;
+      display:block;
+      margin:auto;
+      margin-left: -200px;
+      opacity: 0.2;
+      transform: rotate(-20deg);
+      width: "80%";
+      
+    }
+   
+    td {
+        border: 1px solid rgb(65, 131, 253);
+        font-size: 10px;
+    }
+    
+    tr{
+      border: 1px solid rgb(65, 131, 253);
+  
+    }
+    
+    ul, li{
+        text-transform: uppercase
+    }
+
+    .firma {
+      border-top: 1px solid rgba(0, 0, 0, 0.462);
+      height: 1px;
+      max-width: 200px;
+      padding: 5px;
+      margin: 60px auto 0 auto;
+    }
+    p{
+      margin: 0px auto;
+     text-align: center;
+    }

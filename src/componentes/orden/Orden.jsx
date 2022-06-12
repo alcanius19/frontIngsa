@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useState,  } from "react";
 import Responsable from "./Responsable";
 import {Recursos} from "./Recursos";
 import PropTypes from "prop-types";
@@ -11,12 +11,10 @@ import { CREAR_ORDEN } from "./graphql/mutations";
 import { Empleados } from "../../data/empleados";
 import Swal from "sweetalert2";
 import { DataContext } from "../context/DataContext";
-import InputDinamico from "./InputDinamico";
-function OrdenTrabajo() {
-  const { data } = useContext(DataContext);
 
-  const [datosRecurso,setDatosRecurso] = useState();
+function OrdenTrabajo() {
   
+  const {data} = useContext(DataContext)
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectTrabajo, setSelectTrabajo] = useState(null);
   const [crearOrden] = useMutation(CREAR_ORDEN);
@@ -81,8 +79,8 @@ function OrdenTrabajo() {
   datos.trabajo = datosTrabajo().toString();
 
   const handleInpuChange = (event) => {
-    const usuariosRecurso = localStorage.getItem("userRecurso");
-    datos.recursos = usuariosRecurso;
+    
+    
     let value = event.target.value;
     let codigo = document.getElementsByName("codigo")[0];
     let nombre = document.getElementsByName("nombre")[0];
@@ -118,6 +116,7 @@ function OrdenTrabajo() {
   // CREAR ORDEN
   const enviarDatos = (event) => {
     event.preventDefault();
+    const usuariosRecurso = localStorage.getItem("userRecurso");
     crearOrden({
       variables: {
         orden_trabajo: parseInt(datos.orden_trabajo),
@@ -135,7 +134,7 @@ function OrdenTrabajo() {
         detalle_trabajos: datos.detalle_trabajos,
         tipo_vehiculo: datos.tipo_vehiculo,
         placa_vehiculo: datos.placa_vehiculo,
-        recursos: datos.recursos,
+        recursos: usuariosRecurso,
         requerimientos: datos.requerimientos,
         trabajo: datos.trabajo,
         cierre: datos.cierre,
@@ -143,8 +142,8 @@ function OrdenTrabajo() {
         vales_alimentacion: datos.vales_alimentacion,
         pernoctada: datos.pernoctada,
         reponsable_orden: {
-          nombre: datos.nombre_resp_ord,
-          cedula: parseInt(datos.cedula1),
+          nombre: data.nombre,
+          cedula: parseInt(data.cedula),
         },
         responsable_trabajo: {
           nombre: datos.nombre_resp_trab,
@@ -202,6 +201,7 @@ function OrdenTrabajo() {
                 name="sector"
                 onChange={handleInpuChange}
               >
+                 <option value="none" selected disabled hidden>Seleccione una Opcion</option>
                 <option value="URBANO">Urbano</option>
                 <option value="RURAL">Rural</option>
               </select>
@@ -260,7 +260,7 @@ function OrdenTrabajo() {
           </div>
 
           <hr />
-          <Recursos  />
+          <Recursos recurso={handleInpuChange}  />
           <hr />
           <h6 className="text-center">Trabajo de alto riesgo</h6>
 
@@ -382,7 +382,9 @@ function OrdenTrabajo() {
                     className="form-control"
                     name="nombre_resp_ord"
                     id=""
+                    value={data.nombre}
                     onChange={handleInpuChange}
+                    readOnly
                   />
                   <label className="form-label">Cedula</label>
                   <input
@@ -390,7 +392,9 @@ function OrdenTrabajo() {
                     className="form-control"
                     name="cedula1"
                     id=""
+                    value={data.cedula}
                     onChange={handleInpuChange}
+                    readOnly
                   />
                 </td>
                 <td>

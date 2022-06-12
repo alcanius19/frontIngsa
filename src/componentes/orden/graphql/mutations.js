@@ -68,6 +68,7 @@ export const CREAR_ORDEN = gql`
      $estado: Boolean
      $fecha_terminacion: String
      $cierre: String
+     $detalle_trabajos: String
      $fecha_cierre: String
      $vales_alimentacion: String
      $pernoctada: String
@@ -78,6 +79,7 @@ export const CREAR_ORDEN = gql`
          estado: $estado
          fecha_terminacion: $fecha_terminacion
          cierre: $cierre
+         detalle_trabajos: $detalle_trabajos
          fecha_cierre: $fecha_cierre
          vales_alimentacion: $vales_alimentacion
          pernoctada: $pernoctada

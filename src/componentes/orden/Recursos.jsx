@@ -73,7 +73,7 @@ export const  Recursos = ({ recurso })=> {
       {" "}
       {inputList.map((x, i) => {
         return (
-          <div className="row p-0 justify-content-center">
+          <div className="row p-0 justify-content-center" key={i}>
            <div className="col-sm-3 p-1">
             <input
               name="cedula"
@@ -82,6 +82,7 @@ export const  Recursos = ({ recurso })=> {
               type="number"
               value={x.cedula}
               onChange={(e) => handleInputChange(e, i)}
+              key={i}
             />
            </div>
            <div className="col-sm-3 p-1">
@@ -92,6 +93,7 @@ export const  Recursos = ({ recurso })=> {
               value={x.codigo}
               onChange={(e) => handleInputChange(e, i)}
               readOnly
+              
             />
             </div>
             <div className="col-sm-3 p-1">

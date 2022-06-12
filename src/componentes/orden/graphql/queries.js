@@ -13,6 +13,7 @@ export const LISTAR_ORDENES = gql`
       fecha_elaboracion
       fecha_terminacion
       cierre
+      detalle_trabajos
       fecha_cierre
       vales_alimentacion
       pernoctada
@@ -41,9 +42,7 @@ export const ORDEN_ID = gql`
       detalle_trabajos
       tipo_vehiculo
       placa_vehiculo
-      codigo1
-      nombre1
-      cedula1
+      recursos
       requerimientos
       trabajo
       cierre

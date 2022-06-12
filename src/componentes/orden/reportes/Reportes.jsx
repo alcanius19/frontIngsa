@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import { useQuery, useMutation } from "@apollo/client";
 import { LISTAR_ORDENES } from "../graphql/queries";
@@ -18,12 +18,14 @@ export default function Reportes() {
     estado: false,
     fecha_terminacion: "",
     cierre: "",
+    detalle_trabajos:"",
     fecha_cierre: "",
     vales_alimentacion: "",
     pernoctada: "",
   });
-  const { data } = useQuery(LISTAR_ORDENES, {
+  const { data } = useQuery(LISTAR_ORDENES,{
     fetchPolicy: "no-cache",
+    
   });
   let datos = data?.listarOrden;
 
@@ -48,7 +50,9 @@ export default function Reportes() {
   };
 
   // actualizar Orden de trabajo
-
+  useEffect(()=>{
+    console.log("cambio");
+  },[datosSelect.estado])
   const editarOrden = () => {
     updateOrden({
       variables: {
@@ -56,14 +60,16 @@ export default function Reportes() {
         estado: estado,
         fecha_terminacion: datosSelect.fecha_terminacion,
         cierre: datosSelect.cierre,
+        detalle_trabajos: datosSelect.detalle_trabajos,
         fecha_cierre: datosSelect.fecha_cierre,
         vales_alimentacion: datosSelect.vales_alimentacion,
         pernoctada: datosSelect.pernoctada,
       },
+      refetchQueries: [{query: LISTAR_ORDENES}]
     }).then((res) => {
       if (res) {
         Swal.fire("Exitoso!", "Orden Actualizada!", "success").then(() =>
-          window.location.reload()
+          setModalEditar(false)
         );
       } else {
         console.log("error");
@@ -97,6 +103,11 @@ export default function Reportes() {
     {
       name: "ID",
       selector: "ordensId",
+      sortable: true,
+    },
+    {
+      name: "detalles trabajo",
+      selector: "detalle_trabajos",
       sortable: true,
     },
     // {
@@ -204,6 +215,15 @@ export default function Reportes() {
               rows="3"
               name="cierre"
               defaultValue={datosSelect && datosSelect.cierre}
+              onChange={handleChange}
+            ></textarea>
+            
+             <label>Detalles Trabajo</label>
+            <textarea
+              className="form-control"
+              rows="3"
+              name="detalle_trabajos"
+              defaultValue={datosSelect && datosSelect.detalle_trabajos}
               onChange={handleChange}
             ></textarea>
 
