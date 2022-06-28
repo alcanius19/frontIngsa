@@ -13,7 +13,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 // uri: "https://ingsa.herokuapp.com/graphql",
 // http://localhost:8080/graphql
 const client = new ApolloClient({
-  uri: "https://ingsa.herokuapp.com/graphql",
+  uri: "https://backingsa-testorden.up.railway.app/graphql",
   cache: new InMemoryCache(),
 });
 

@@ -5,26 +5,26 @@
         border-radius: 5px;
         border-style: hidden; /* hide standard table (collapsed) border */
         box-shadow: 0 0 0 2px rgb(32, 124, 211); /* this draws the table border  */ 
-        height: 100%;
         background-color: rgba(253, 253, 253, 0.422);
-
-     
+        transform: scale(1.0);
+        width: 820px;
+        margin-bottom:50px;
     }
 
     img{
-      position: fixed;
+      display: block;
       display:block;
-      margin:auto;
-      margin-left: -200px;
-      opacity: 0.2;
-      transform: rotate(-20deg);
+      margin: 0px auto;
+      /* margin-left: -200px; */
+      width: 175px;
+      height: 70px;
       width: "80%";
       
     }
    
     td {
-        border: 1px solid rgb(65, 131, 253);
-        font-size: 10px;
+        border: 1.2px solid rgb(65, 131, 253);
+        font-size: 12px;
     }
     
     tr{

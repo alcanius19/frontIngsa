@@ -180,6 +180,7 @@ function OrdenTrabajo() {
                 className="form-control"
                 placeholder="Contrato"
                 onChange={handleInpuChange}
+                required
               />
             </div>
             <div className="col-auto p-1">
@@ -200,6 +201,7 @@ function OrdenTrabajo() {
                 placeholder="Sector"
                 name="sector"
                 onChange={handleInpuChange}
+                required
               >
                  <option value="none" selected disabled hidden>Seleccione una Opcion</option>
                 <option value="URBANO">Urbano</option>
@@ -230,6 +232,7 @@ function OrdenTrabajo() {
                 className="form-control"
                 placeholder="Fecha y hora de inicio:"
                 onChange={handleInpuChange}
+                required
               />
             </div>
             <div className="col-auto p-1">
@@ -240,6 +243,7 @@ function OrdenTrabajo() {
                 className="form-control"
                 placeholder="Fecha y hora de terminación :"
                 onChange={handleInpuChange}
+                required
               />
             </div>
           </div>
@@ -256,6 +260,7 @@ function OrdenTrabajo() {
               name="detalle_trabajos"
               onChange={handleInpuChange}
               defaultValue="Descripcion."
+              required
             ></textarea>
           </div>
 
@@ -272,6 +277,7 @@ function OrdenTrabajo() {
             options={Elementos.trabajo}
             className="basic-multi-select"
             classNamePrefix="select"
+            required
           />
 
           <hr />
@@ -284,6 +290,7 @@ function OrdenTrabajo() {
             options={Elementos.items}
             className="basic-multi-select"
             classNamePrefix="select"
+            required
           />
 
           <span>

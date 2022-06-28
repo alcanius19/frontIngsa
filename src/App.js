@@ -64,8 +64,8 @@ function App() {
             </>
           }
         /> 
-         <Route exact path="/formato_orden/:id" element={<FormatoOrden />} /> */}
-        {/* <Route
+         <Route exact path="/formato_orden/:id" element={<FormatoOrden />} />
+        <Route
           exact
           path="/"
           element={
@@ -87,8 +87,8 @@ function App() {
         
         
         <Route exact path="/formato_orden/:id" element={<FormatoOrden />} />
-        <Route exact path="/firma" element={<Firma />} />
-         <Route
+        <Route exact path="/firma" element={<Firma />} /> */}
+         {/* <Route
             exact
             path="/recovery-password"
             element={<RecoveryPassword />}

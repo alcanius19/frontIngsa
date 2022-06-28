@@ -12,17 +12,6 @@ const empleados = [
     },
     {
       cargo: "Analista Lider de informacin",
-      nombres: "FELIPE MARTINEZ LEIVA",
-      Correo: "gerson.herrerab@ingsa.co",
-      Llaves: "0",
-      cedula: "1",
-      celular: "",
-      codigo: "5778",
-      zona: "166",
-      contrato: "382-2021",
-    },
-    {
-      cargo: "Analista Lider de informacin",
       nombres: "JESSICA PAOLA GARRIDO",
       Correo: "jessica@ingsa.co",
       Llaves: "0",

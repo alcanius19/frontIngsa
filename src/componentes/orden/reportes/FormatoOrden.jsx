@@ -7,7 +7,7 @@ import { useQuery } from "@apollo/client";
 import { ORDEN_ID } from "../graphql/queries";
 import { useParams } from "react-router-dom";
 import styles from './style/Orden.module.css';
-import imagen from "../../img/logo.jpeg"
+import imagen from "../../img/logoingsa.png"
 
 
 export default function FormatoOrden(props) {
@@ -61,16 +61,19 @@ export default function FormatoOrden(props) {
         <Link to="/reportes" className="navbar-brand">
           ATRAS
         </Link>
+       
       </button>
+      <a href="#" onClick={handlePrint}>Print</a>
       <div id="capture">
         
         <div className="container-fluid mt-1  ">
-        <img src={imagen}></img>
+       
           <table className={styles.table} style={{ margin: "0 auto" }}>
             <tbody>
               <tr>
-               
+                <td rowSpan="4"> <img src={imagen}></img></td>
                 <td colSpan="8" style={{ textAlign: "center" }}>
+               
                   <h6>FORMATO ORDEN DE TRABAJO</h6>
                   
                 </td>
