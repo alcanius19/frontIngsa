@@ -10,10 +10,10 @@ import App from "./App";
 
 // 1 import the required dependencies
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-// uri: "https://ingsa.herokuapp.com/graphql",
+// uri: "https://backingsa-testorden.up.railway.app/graphql",
 // http://localhost:8080/graphql
 const client = new ApolloClient({
-  uri: "https://backingsa-testorden.up.railway.app/graphql",
+  uri: "http://localhost:8080/graphql",
   cache: new InMemoryCache(),
 });
 

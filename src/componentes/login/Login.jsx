@@ -13,6 +13,7 @@ export default function Login() {
     nombre: "",
     cargo: "",
     estado: "",
+    perfil: ""
   });
   const { setData } = useContext(DataContext);
   const navegar = useNavigate();
@@ -36,6 +37,7 @@ export default function Login() {
         datos.cargo = v.cargo;
         datos.nombre = v.nombres;
         datos.estado = true;
+        datos.perfil = v?.perfil
       } else {
       }
     });

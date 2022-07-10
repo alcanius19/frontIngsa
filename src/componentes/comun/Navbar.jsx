@@ -54,14 +54,14 @@ export default function Navbar() {
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
-                    <Link className="dropdown-item" to="/formato_orden">
-                     Formato Orden
+                    <Link className="dropdown-item" to="/verPermiso">
+                     Ver Solicitudes
                     </Link>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
-                      Cargar Empleados
-                    </a>
+                  <Link className="dropdown-item" to="/crearPermiso">
+                    Crear Permiso
+                    </Link>
                   </li>
                   {/* <li>
                     <a className="dropdown-item" href="#">

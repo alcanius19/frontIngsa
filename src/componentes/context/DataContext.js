@@ -8,6 +8,7 @@ const datosGlobales = {
   nombre: "",
   cargo: "",
   estado: false,
+  perfil:""
 };
 
 export const DataProvider = ({ children }) => {

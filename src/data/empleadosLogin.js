@@ -20,6 +20,7 @@ const empleados = [
       codigo: "1234",
       zona: "168",
       contrato: "382-2022",
+      perfil: "admin"
     },
     {
       cargo: "Profesional analista de informacin",

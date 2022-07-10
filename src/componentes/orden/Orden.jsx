@@ -15,6 +15,8 @@ import { DataContext } from "../context/DataContext";
 function OrdenTrabajo() {
   
   const {data} = useContext(DataContext)
+  console.log("🚀 ~ file: Orden.jsx ~ line 18 ~ OrdenTrabajo ~ data", data)
+  
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectTrabajo, setSelectTrabajo] = useState(null);
   const [crearOrden] = useMutation(CREAR_ORDEN);

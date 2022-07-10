@@ -102,12 +102,12 @@ export default function Reportes() {
     },
     {
       name: "ID",
-      selector: "ordensId",
+      selector: (row)=> row.ordensId,
       sortable: true,
     },
     {
       name: "detalles trabajo",
-      selector: "detalle_trabajos",
+      selector: (row)=> row.detalle_trabajos, 
       sortable: true,
     },
     // {
@@ -117,7 +117,7 @@ export default function Reportes() {
     // },
     {
       name: "Estado",
-      selector: "estado",
+      selector: (row)=> row.estado, 
       sortable: true,
       cell: (row) => <h5>{row.estado === true ? "activo" : "inactivo"}</h5>,
     },
@@ -133,32 +133,32 @@ export default function Reportes() {
     // },
     {
       name: "Requerimientos",
-      selector: "requerimientos",
+      selector: (row)=> row.requerimientos, 
       sortable: true,
     },
     {
       name: "Fecha Terminacion",
-      selector: "fecha_terminacion",
+      selector: (row)=> row.fecha_terminacion, 
       sortable: true,
     },
     {
       name: "Cierre",
-      selector: "cierre",
+      selector: (row)=> row.cierre, 
       sortable: true,
     },
     {
       name: "Fecha Cierre",
-      selector: "fecha_cierre",
+      selector: (row)=> row.fecha_cierre, 
       sortable: true,
     },
     {
       name: "Vales alimentacion",
-      selector: "vales_alimentacion",
+      selector: (row)=> row.vales_alimentacion, 
       sortable: true,
     },
     {
       name: "Pernoctada",
-      selector: "pernoctada",
+      selector: (row)=> row.pernoctada, 
       sortable: true,
     },
   ];

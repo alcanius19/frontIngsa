@@ -8,6 +8,8 @@ import OrdenTrabajo from "./componentes/orden/Orden";
 import Reportes from "./componentes/orden/reportes/Reportes";
 import FormatoOrden from "./componentes/orden/reportes/FormatoOrden";
 import Firma from "./componentes/orden/reportes/Firma";
+import CrearPermiso from "./componentes/permiso/CrearPermiso";
+import VerPermiso from "./componentes/permiso/VerPermiso";
 import Login from "./componentes/login/Login";
 import ProtectedRoute from "./componentes/login/ProtectedRoute";
 import { DataContext } from "./componentes/context/DataContext";
@@ -26,7 +28,12 @@ function App() {
               <Login />
             </>
           }
+        
         />
+
+       
+
+   
        <Route path="/" element={<ProtectedRoute />}>
           <Route exact path='/' element={<>
               <Navbar /> <OrdenTrabajo />
@@ -41,9 +48,30 @@ function App() {
             </>
           }
           /> 
+          <Route
+         exact
+         path="/crearPermiso"
+         element={
+          <>
+          <Navbar />
+          <CrearPermiso/>
+          </>
+         }
+       />
+       <Route
+         exact
+         path="/verPermiso"
+         element={
+          <>
+          <Navbar />
+          <VerPermiso/>
+          </>
+         }
+       />
           <Route exact path="/formato_orden/:id" element={<FormatoOrden />} />
           
         </Route>
+
         {/* <Route
           exact
           path="/reportes"
